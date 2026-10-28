@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Законодательная база штата Сан-Андреас: Уголовный, Административный и Процессуальный кодексы, Устав LSPD.">
+<title>Законы штата Сан-Андреас</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚖️</text></svg>">
+<style>
+:root { --bg:#04060f; --bg-2:#0a1024; --surface:rgba(255,255,255,.04); --surface-strong:#0d1530; --glass:rgba(20,32,70,.45); --border:rgba(96,165,250,.22); --text:#dbe6ff; --muted:#8fa3cf; --accent:#60a5fa; --accent-2:#93c5fd; --accent-soft:rgba(59,130,246,.14); --grad:linear-gradient(135deg,#3b82f6,#2563eb); --glow:0 0 40px rgba(59,130,246,.2); color-scheme: dark; }
+* { box-sizing: border-box; }
+body { margin:0; font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color:var(--text); line-height:1.6; min-height:100vh;
+  background: transparent; }
+.hero { text-align:center; padding:56px 20px 34px; }
+.badge-top { display:inline-block; font-size:.78rem; letter-spacing:.12em; text-transform:uppercase; color:var(--accent); border:1px solid var(--border); padding:6px 14px; border-radius:999px; background:var(--surface); }
+.hero h1 { font-size:clamp(2rem,5vw,3.1rem); margin:16px 0 8px; line-height:1.15; background:linear-gradient(90deg,#fff,#93c5fd 45%,#3b82f6); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.hero p { color:var(--muted); max-width:620px; margin:0 auto; }
+.wrap { max-width:1120px; margin:0 auto; padding:0 18px 60px; }
+.toolbar { position:sticky; top:env(safe-area-inset-top,0px); z-index:20; background:color-mix(in srgb,var(--bg) 85%,transparent); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border:1px solid var(--border); border-radius:18px; padding:14px; margin-bottom:22px; box-shadow:var(--glow); }
+.tabs { display:flex; gap:8px; overflow-x:auto; scrollbar-width:none; }
+.tabs::-webkit-scrollbar { display:none; }
+.tab { flex:0 0 auto; border:1px solid transparent; background:transparent; color:var(--muted); padding:9px 16px; border-radius:12px; cursor:pointer; font:inherit; font-weight:600; font-size:.93rem; }
+.tab:hover { color:var(--text); background:var(--surface); }
+.tab[aria-selected="true"] { color:#fff; background:var(--grad); }
+.search-row { display:flex; gap:10px; margin-top:12px; flex-wrap:wrap; align-items:center; }
+.search { flex:1 1 260px; padding:13px 16px; border-radius:12px; border:1px solid var(--border); background:var(--surface-strong); color:var(--text); font:inherit; outline:none; }
+.search:focus { border-color:var(--accent); box-shadow:0 0 0 4px var(--accent-soft); }
+.controls { display:flex; gap:8px; }
+.btn { border:1px solid var(--border); background:var(--surface); color:var(--muted); padding:9px 12px; border-radius:10px; cursor:pointer; font:inherit; font-size:.85rem; font-weight:600; }
+.btn:hover { color:var(--text); border-color:var(--accent); }
+.meta { color:var(--muted); font-size:.88rem; margin:4px 2px 14px; }
+.list { display:grid; gap:12px; }
+.art { background:var(--surface-strong); border:1px solid var(--border); border-radius:16px; overflow:hidden; transition:border-color .2s, box-shadow .2s; }
+.art:hover { border-color:var(--accent); }
+.art[open] { box-shadow:var(--glow); }
+.art > summary { list-style:none; cursor:pointer; padding:16px 18px; display:flex; gap:12px; align-items:flex-start; justify-content:space-between; }
+.art > summary::-webkit-details-marker { display:none; }
+.art-left { display:flex; flex-direction:column; gap:4px; min-width:0; }
+.num { font-weight:800; color:var(--accent); font-size:.9rem; }
+.title { font-weight:600; font-size:1rem; }
+.pen { color:var(--muted); font-size:.88rem; }
+.caret { flex:0 0 auto; width:28px; height:28px; border-radius:50%; border:1px solid var(--border); display:grid; place-items:center; color:var(--accent); font-size:1.1rem; transition:transform .2s; }
+.art[open] .caret { transform:rotate(45deg); }
+.tags { display:flex; gap:5px; flex-wrap:wrap; margin-top:4px; }
+.tag { font-size:.7rem; font-weight:800; padding:3px 7px; border-radius:6px; background:var(--accent-soft); color:var(--accent); }
+.parts { padding:0 18px 18px; border-top:1px solid var(--border); }
+.part { margin:12px 0 0; }
+.part b { color:var(--accent-2); }
+.part p { margin:4px 0 0; font-size:.95rem; }
+.part ul { margin:6px 0 0; padding-left:20px; font-size:.93rem; }
+.note { color:var(--muted); font-size:.82rem; margin-top:14px; font-style:italic; }
+.empty { text-align:center; color:var(--muted); padding:40px 0; display:none; }
+.agent { margin-top:40px; padding:22px; border-radius:22px; background:var(--surface-strong); border:1px solid var(--border); box-shadow:var(--glow); }
+.agent h2 { margin:0 0 4px; font-size:1.3rem; }
+.agent .sub { color:var(--muted); margin:0 0 14px; font-size:.92rem; }
+.chat { display:flex; flex-direction:column; gap:10px; max-height:340px; overflow-y:auto; }
+.msg { max-width:92%; padding:12px 14px; border-radius:14px; white-space:pre-line; font-size:.93rem; }
+.msg.user { align-self:flex-end; background:var(--grad); color:#fff; font-weight:600; }
+.msg.bot { align-self:flex-start; background:var(--surface); border:1px solid var(--border); }
+.msg.bot .t { display:block; color:var(--accent); font-weight:700; margin-bottom:3px; }
+.ask { display:flex; gap:8px; margin-top:10px; }
+.ask input { flex:1; min-width:0; padding:12px 14px; border-radius:12px; border:1px solid var(--border); background:var(--bg-2); color:var(--text); font:inherit; outline:none; }
+.ask button { padding:12px 18px; border:0; border-radius:12px; cursor:pointer; font:inherit; font-weight:700; color:#fff; background:var(--grad); }
+footer { margin-top:56px; padding:26px 18px; text-align:center; color:var(--muted); font-size:.88rem; border-top:1px solid var(--border); }
+.credit { display:inline-block; margin-top:8px; padding:6px 14px; border-radius:999px; background:var(--accent-soft); color:var(--accent); font-weight:700; }
+@media (max-width:560px) { .hero { padding:40px 16px 24px; } }
+@media (prefers-reduced-motion: reduce) { * { transition:none !important; } }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Unbounded:wght@500;700&display=swap">
+<style id="v2">
+@property --ang{syntax:'<angle>';initial-value:0deg;inherits:false}
+:root{--fd:"Unbounded","Onest",system-ui,sans-serif;--fb:"Onest","Inter",system-ui,sans-serif;--ease:cubic-bezier(.16,1,.3,1)}
+html{background:var(--bg);scroll-behavior:smooth}
+body{font-family:var(--fb);-webkit-font-smoothing:antialiased;background:transparent}
+body.lock{overflow:hidden}
+::selection{background:rgba(59,130,246,.5);color:#fff}
+::-webkit-scrollbar{width:10px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:linear-gradient(#2563eb,#60a5fa);border-radius:10px;border:2px solid var(--bg)}
+.bg{position:fixed;inset:0;z-index:-2;pointer-events:none;overflow:hidden;background:radial-gradient(1200px 700px at 80% -10%,rgba(37,99,235,.3),transparent 60%),linear-gradient(180deg,var(--bg),var(--bg-2))}
+.bg i{position:absolute;border-radius:50%;filter:blur(100px);will-change:transform}
+.bg i:nth-child(1){width:560px;height:560px;background:#2563eb;opacity:.45;top:-160px;left:-120px;animation:dA 24s ease-in-out infinite alternate}
+.bg i:nth-child(2){width:460px;height:460px;background:#22d3ee;opacity:.2;bottom:-160px;right:-100px;animation:dB 28s ease-in-out infinite alternate}
+.bg i:nth-child(3){width:400px;height:400px;background:#7c3aed;opacity:.26;top:45%;left:55%;animation:dC 32s ease-in-out infinite alternate}
+.bg::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(96,165,250,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(96,165,250,.05) 1px,transparent 1px);background-size:60px 60px;-webkit-mask-image:radial-gradient(ellipse at 50% 30%,#000 15%,transparent 72%);mask-image:radial-gradient(ellipse at 50% 30%,#000 15%,transparent 72%)}
+@keyframes dA{to{transform:translate(240px,180px) scale(1.2)}}@keyframes dB{to{transform:translate(-260px,-150px) scale(1.25)}}@keyframes dC{to{transform:translate(-200px,130px) scale(.8)}}
+.glow{position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(560px circle at var(--mx,50%) var(--my,35%),rgba(59,130,246,.2),transparent 65%)}
+.grain{position:fixed;inset:0;z-index:2147483640;pointer-events:none;opacity:.07;mix-blend-mode:overlay;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.prog{position:fixed;top:0;left:0;right:0;height:3px;z-index:2147483646;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,#2563eb,#60a5fa,#a5f3fc);box-shadow:0 0 14px rgba(96,165,250,.9)}
+/* интро */
+#intro{position:fixed;inset:0;z-index:2147483645;background:#02040b;display:grid;place-items:center;clip-path:inset(0);transition:clip-path 1.1s var(--ease);animation:gone 0s 4.5s forwards}
+#intro.done{clip-path:inset(0 0 100% 0)}
+@keyframes gone{to{visibility:hidden}}
+.in-c{text-align:center}
+.in-c svg{width:96px;height:96px;fill:none;stroke:#93c5fd;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:420;stroke-dashoffset:420;animation:draw 1.5s var(--ease) .1s forwards;filter:drop-shadow(0 0 12px #3b82f6)}
+@keyframes draw{to{stroke-dashoffset:0}}
+#pct{font:700 clamp(3rem,11vw,6.5rem)/1 var(--fd);margin-top:20px;background:linear-gradient(#fff,#60a5fa);-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums}
+.in-bar{width:min(260px,60vw);height:2px;background:rgba(96,165,250,.2);margin:18px auto 0;overflow:hidden}
+.in-bar i{display:block;height:100%;background:#60a5fa;transform-origin:0;transform:scaleX(0);box-shadow:0 0 12px #60a5fa}
+/* герой */
+.hero{position:relative;min-height:100svh;display:grid;place-items:center;padding:90px 20px 70px;overflow:hidden}
+#globe{position:absolute;inset:0;width:100%;height:100%;will-change:transform}
+.hero-in{position:relative;z-index:2;max-width:1000px;will-change:transform,opacity}
+.badge-top{font-family:var(--fb);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.badge-top::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:#60a5fa;margin-right:9px;animation:pls 2s infinite}
+@keyframes pls{0%{box-shadow:0 0 0 0 rgba(96,165,250,.7)}70%,100%{box-shadow:0 0 0 10px rgba(96,165,250,0)}}
+.hero h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.1rem,7.4vw,6rem);line-height:1.04;letter-spacing:-.035em;margin:26px 0 22px;background:none;color:inherit;-webkit-text-fill-color:initial;text-shadow:0 0 60px rgba(37,99,235,.5)}
+.ln{display:block;overflow:hidden;padding:.06em .04em .14em}
+.ln span{display:inline-block;transform:translateY(118%) rotate(5deg);transform-origin:0 100%;animation:rise 1.3s var(--ease) forwards,shn 6s ease-in-out 3s infinite alternate;animation-delay:calc(var(--i)*.14s),3s;animation-play-state:paused;background:linear-gradient(100deg,#fff 30%,#93c5fd 45%,#3b82f6 50%,#93c5fd 55%,#fff 70%) 0 0/260% 100%;-webkit-background-clip:text;background-clip:text;color:transparent}
+body.ready .ln span{animation-play-state:running}
+@keyframes rise{to{transform:none}}@keyframes shn{to{background-position:100% 0}}
+.hero p{font-size:clamp(1rem,1.6vw,1.2rem);max-width:560px;opacity:0;transform:translateY(16px);transition:opacity 1s var(--ease) .9s,transform 1s var(--ease) .9s}
+.stats{display:flex;justify-content:center;flex-wrap:wrap;gap:14px;margin:34px 0 26px;opacity:0;transform:translateY(24px);transition:opacity 1s var(--ease) 1.1s,transform 1s var(--ease) 1.1s}
+.pill{display:inline-flex;align-items:center;gap:10px;padding:12px 20px;border-radius:999px;border:1px solid var(--border);background:var(--accent-soft);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);opacity:0;transition:opacity 1s var(--ease) 1.3s}
+body.ready .hero p,body.ready .stats,body.ready .pill{opacity:1;transform:none}
+.stats>div{min-width:140px;padding:16px 22px;border-radius:20px;border:1px solid var(--border);background:var(--glass);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.stats b{display:block;font:700 2rem/1.1 var(--fd);background:linear-gradient(#fff,#60a5fa);-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums}
+.stats span{color:var(--muted);font-size:.85rem}
+.cue{position:absolute;bottom:22px;left:50%;width:22px;height:38px;margin-left:-11px;border:1.5px solid rgba(147,197,253,.5);border-radius:12px;z-index:2}
+.cue::after{content:"";position:absolute;left:50%;top:7px;width:3px;height:7px;margin-left:-1.5px;border-radius:3px;background:#93c5fd;animation:cue 1.8s var(--ease) infinite}
+@keyframes cue{0%{opacity:0;transform:translateY(0)}30%{opacity:1}100%{opacity:0;transform:translateY(14px)}}
+/* бегущая строка */
+.marq{overflow:hidden;border-block:1px solid var(--border);background:rgba(10,16,36,.5);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:18px 0;margin-bottom:46px;transform:skewY(-1.2deg)}
+#marq{display:flex;width:max-content;align-items:center;gap:34px;padding-right:34px;animation:mq 34s linear infinite}
+#marq span{font:700 clamp(1.4rem,3.4vw,2.6rem)/1 var(--fd);white-space:nowrap;color:transparent;-webkit-text-stroke:1px rgba(147,197,253,.65);letter-spacing:-.02em;transition:color .3s}
+#marq span:hover{color:rgba(96,165,250,.9)}
+#marq u{text-decoration:none;color:#60a5fa;font-size:1.5rem;filter:drop-shadow(0 0 8px #3b82f6)}
+@keyframes mq{to{transform:translateX(-25%)}}
+/* интерфейс */
+.toolbar{background:rgba(6,10,26,.7);border-radius:22px;box-shadow:0 20px 60px -30px rgba(37,99,235,.8)}
+.toolbar::before,.agent::before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;pointer-events:none;background:conic-gradient(from var(--ang),transparent 0 62%,#60a5fa,#a5f3fc,transparent);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:spn 6s linear infinite}
+@keyframes spn{to{--ang:360deg}}
+.agent{position:relative}
+.tab,.btn,.ask button,.qbtn{border-radius:999px;position:relative;overflow:hidden;transition:transform .25s var(--ease),box-shadow .25s,color .2s,border-color .2s}
+.tab[aria-selected="true"],.ask button,.qbtn,.msg.user{box-shadow:0 8px 26px -8px rgba(59,130,246,.85)}
+.btn[aria-pressed="true"]{color:#fff;background:var(--grad);border-color:rgba(147,197,253,.4)}
+.btn:hover,.ask button:hover,.qbtn:hover,.tab:hover{transform:translate(var(--tx,0),var(--ty,0))}
+.tab[aria-selected="true"]::after,.ask button::after,.qbtn::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.4) 50%,transparent 65%);transform:translateX(-120%);transition:transform .7s}
+.tab[aria-selected="true"]:hover::after,.ask button:hover::after,.qbtn:hover::after{transform:translateX(120%)}
+.search,.ask input{border-radius:16px;transition:border-color .2s,box-shadow .3s}
+.search:focus,.ask input:focus{border-color:#3b82f6;box-shadow:0 0 0 4px rgba(59,130,246,.25),0 0 30px rgba(59,130,246,.3)}
+.art,.agent,.qcard{background:var(--glass)!important;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.art{position:relative;border-radius:20px;border-color:rgba(96,165,250,.16);transition:border-color .3s,box-shadow .4s,transform .4s var(--ease)}
+.art>*{position:relative}
+.art::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(380px circle at var(--px,50%) var(--py,50%),rgba(96,165,250,.16),transparent 65%)}
+.art::after{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(240px circle at var(--px,50%) var(--py,50%),#bfdbfe,transparent 70%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+.art:hover::before,.art:hover::after{opacity:1}
+.art:hover{transform:translateY(-3px)}
+.art[open]{box-shadow:0 24px 70px -28px rgba(59,130,246,.75)}
+.art[open] .parts{animation:opn .6s var(--ease)}
+@keyframes opn{from{opacity:0;transform:translateY(-12px)}}
+.num{font-family:var(--fd);font-weight:500;font-size:.8rem}
+.caret{transition:transform .5s var(--ease),background .2s}.art:hover .caret{background:var(--accent-soft)}
+.agent h2{font-family:var(--fd);font-weight:500}
+.rv{opacity:0}.rv.in{opacity:1;animation:up .9s var(--ease) backwards;animation-delay:var(--d,0s)}
+@keyframes up{from{opacity:0;transform:translateY(34px) scale(.97)}}
+.credit{background:linear-gradient(110deg,var(--accent-soft) 40%,rgba(147,197,253,.4) 50%,var(--accent-soft) 60%) 0 0/250% 100%;animation:swp 3.5s linear infinite}
+@keyframes swp{to{background-position:-150% 0}}
+/* курсор */
+.dot,.ring{position:fixed;left:0;top:0;border-radius:50%;pointer-events:none;z-index:2147483647;opacity:0;will-change:transform}
+.dot{width:10px;height:10px;margin:-5px 0 0 -5px;background:#60a5fa;box-shadow:0 0 18px 6px rgba(59,130,246,.6)}
+.ring{width:38px;height:38px;margin:-19px 0 0 -19px;border:1.5px solid rgba(96,165,250,.55);transition:opacity .3s,background .25s,border-color .25s}
+.ring.on{background:rgba(59,130,246,.14);border-color:rgba(147,197,253,.9)}
+@media (hover:none),(pointer:coarse){.dot,.ring,.glow{display:none}}
+@media (max-width:560px){.stats>div{min-width:0;flex:1 1 40%}}
+@media (prefers-reduced-motion:reduce){.bg i,.toolbar::before,.agent::before,#marq,.credit{animation:none}.ln span{transform:none;animation:none}.rv{opacity:1}.rv.in{animation:none}#intro{display:none}.hero p,.stats,.pill{opacity:1;transform:none;transition:none}}
+</style>
+<style id="v3">
+@property --ang2{syntax:'<angle>';initial-value:0deg;inherits:false}
+.bg::before{content:"";position:absolute;inset:-60%;background:conic-gradient(from var(--ang2) at 50% 38%,transparent 0 30%,rgba(96,165,250,.10) 38%,transparent 46% 70%,rgba(124,58,237,.09) 78%,transparent 86%);animation:spn2 40s linear infinite}
+@keyframes spn2{to{--ang2:360deg}}
+#dust{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+/* порталы-разделы */
+.portals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;max-width:920px;margin:38px auto 28px;perspective:1100px;opacity:0;transform:translateY(34px);transition:opacity 1s var(--ease) 1.1s,transform 1.1s var(--ease) 1.1s}
+body.ready .portals{opacity:1;transform:none}
+.pt{position:relative;overflow:hidden;text-align:left;padding:22px 20px 20px;border-radius:24px;border:1px solid var(--border);background:linear-gradient(160deg,rgba(40,70,150,.45),rgba(8,14,38,.65));backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);cursor:pointer;color:var(--text);font:inherit;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .3s var(--ease),border-color .3s,box-shadow .5s;animation:flt 7s ease-in-out infinite alternate}
+.pt:nth-child(2){animation-delay:-2.3s}.pt:nth-child(3){animation-delay:-4.6s}
+@keyframes flt{to{translate:0 -8px}}
+.pt::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(260px circle at var(--gx,50%) var(--gy,0%),rgba(255,255,255,.2),transparent 60%)}
+.pt:hover{border-color:rgba(165,243,252,.7);box-shadow:0 30px 80px -30px rgba(59,130,246,.95),0 0 0 1px rgba(147,197,253,.2) inset}
+.pt:hover::before{opacity:1}
+.pt svg{width:46px;height:46px;fill:none;stroke:#a5f3fc;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 10px rgba(96,165,250,.8));stroke-dasharray:200;stroke-dashoffset:200;animation:draw 2s var(--ease) 2.2s forwards}
+.pt b{display:block;margin:16px 0 8px;font:500 1.02rem/1.25 var(--fd);letter-spacing:-.01em}
+.pt span{display:block;color:var(--muted);font-size:.86rem;line-height:1.5}
+.pt em{display:inline-flex;align-items:center;gap:8px;margin-top:16px;font:600 .84rem var(--fb);font-style:normal;color:var(--accent-2)}
+.pt em::after{content:"";width:22px;height:1.5px;background:currentColor;transition:width .4s var(--ease)}
+.pt:hover em::after{width:44px}
+/* помощник */
+.agent h2{display:flex;align-items:center;gap:12px;font-family:var(--fd);font-weight:500}
+.agent h2::before{content:"";flex:0 0 auto;width:15px;height:15px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#60a5fa 42%,#2563eb);box-shadow:0 0 24px #3b82f6;animation:orb 2.4s ease-in-out infinite}
+@keyframes orb{50%{transform:scale(1.3);box-shadow:0 0 38px #93c5fd}}
+.chat{max-height:440px;padding-right:4px;scrollbar-width:thin}
+.msg{animation:msgin .7s var(--ease)}
+@keyframes msgin{from{opacity:0;transform:translateY(16px) scale(.96)}}
+.msg.bot{max-width:97%}
+.blk+.blk{margin-top:14px;padding-top:14px;border-top:1px dashed var(--border)}
+.msg .go{display:inline-flex;margin-top:10px;padding:7px 15px;border-radius:999px;border:1px solid var(--border);background:var(--accent-soft);color:var(--accent-2);font:600 .82rem var(--fb);cursor:pointer;transition:background .25s,color .25s,transform .25s var(--ease)}
+.msg .go:hover{background:var(--grad);color:#fff;transform:translateX(4px)}
+.typing{display:flex;gap:6px;padding:15px 17px}
+.typing i{width:7px;height:7px;border-radius:50%;background:#60a5fa;animation:dt 1s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes dt{0%,60%,100%{transform:none;opacity:.4}30%{transform:translateY(-6px);opacity:1}}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.chip{border:1px solid var(--border);background:var(--surface);color:var(--muted);padding:8px 14px;border-radius:999px;font:500 .84rem var(--fb);cursor:pointer;transition:all .25s var(--ease)}
+.chip:hover{color:#fff;border-color:var(--accent);background:var(--accent-soft);transform:translateY(-2px)}
+/* подвал */
+.mega{margin:70px 0 0;text-align:center;font:700 clamp(2.4rem,12.5vw,10.5rem)/1 var(--fd);letter-spacing:-.045em;white-space:nowrap;overflow:hidden;color:transparent;-webkit-text-stroke:1px rgba(147,197,253,.45);background:linear-gradient(90deg,#bfdbfe,#3b82f6 var(--fp,0%),transparent var(--fp,0%)) 0 0/100% 100%;-webkit-background-clip:text;background-clip:text;user-select:none}
+@media (max-width:700px){.portals{grid-template-columns:1fr}.pt{animation:none}}
+@media (prefers-reduced-motion:reduce){.bg::before,.pt{animation:none}.pt svg{animation:none;stroke-dashoffset:0}.portals{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+<div id="intro"><div class="in-c"><svg viewBox="0 0 100 100"><path pathLength="420" d="M50 10v72M30 88h40M18 26h64M18 26l-12 26a12 9 0 0 0 24 0zM82 26l-12 26a12 9 0 0 0 24 0z"/></svg><div id="pct">0</div><div class="in-bar"><i></i></div></div></div>
+<header class="hero" id="hero">
+  <canvas id="globe" aria-hidden="true"></canvas>
+  <div class="hero-in">
+    <span class="badge-top">Законодательная база · Сан-Андреас</span>
+    <h1 aria-label="Законы штата Сан-Андреас"><span class="ln" aria-hidden="true"><span style="--i:0">Законы</span> <span style="--i:1">штата</span></span><span class="ln" aria-hidden="true"><span style="--i:2">Сан-Андреас</span></span></h1>
+    <p>Нажмите на статью, чтобы увидеть её части (ч. 1, ч. 2 и так далее).</p>
+    <div class="portals" id="portals"></div>
+    <div class="pill"><span style="font-size:1.2rem">💬</span><span><b style="color:var(--muted);font-weight:500">По вопросам:</b> <b style="color:var(--accent)">Discord @salari_fox</b></span></div>
+  </div>
+  <div class="cue" aria-hidden="true"></div>
+</header>
+<div class="marq" aria-hidden="true"><div id="marq"></div></div>
+
+
+<main class="wrap">
+  <div class="toolbar">
+    <div class="tabs" role="tablist" id="tabs"></div>
+    <div class="search-row">
+      <input id="search" class="search" type="search" placeholder="Поиск по номеру или названию" aria-label="Поиск">
+      <div class="controls">
+        <button class="btn" id="expandAll" type="button">Раскрыть все</button>
+        <button class="btn" id="collapseAll" type="button">Свернуть все</button>
+      </div>
+    </div>
+  </div>
+  <div class="mode-row" style="display:flex;gap:8px;margin:0 0 14px"><button class="btn" id="modeLaw" type="button">Законы</button><button class="btn" id="modeQuiz" type="button">Тест по УК</button></div>
+  <div id="quizBox" hidden>
+    <style>
+      [hidden]{display:none !important}
+      .qcard{background:var(--surface-strong);border:1px solid var(--border);border-radius:18px;padding:22px;box-shadow:var(--glow)}
+      .qlab{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:700}
+      .qtext{font-size:1.05rem;margin:10px 0 6px;line-height:1.6}
+      .qopt{display:block;width:100%;text-align:left;margin-top:8px;padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:transparent;color:var(--text);font:inherit;cursor:pointer}
+      .qopt:disabled{cursor:default}
+      .qopt.ok{border-color:#34d399;background:rgba(52,211,153,.15)}
+      .qopt.bad{border-color:#f87171;background:rgba(248,113,113,.15)}
+      .qfb{margin-top:12px;font-size:.93rem;color:var(--muted)}
+      .qbtn{margin-top:14px;padding:12px 18px;border:0;border-radius:12px;font:inherit;font-weight:700;color:#fff;background:var(--grad);cursor:pointer}
+    </style>
+    <div class="qcard" id="qCard"></div>
+  </div>
+  <div class="meta" id="meta"></div>
+  <div class="list" id="list"></div>
+  <p class="empty" id="empty">Ничего не найдено.</p>
+
+  <section class="agent" aria-labelledby="agent-title">
+    <h2 id="agent-title">Помощник по статьям</h2>
+    <p class="sub">Опишите ситуацию своими словами: помощник найдёт нужные статьи в Уголовном и Процессуальном кодексах и в Уставе LSPD.</p>
+    <div class="chat" id="chat" aria-live="polite"></div>
+    <div class="chips" id="chips"></div>
+    <div class="ask">
+      <input id="q" type="text" placeholder="Например: человек ударил сотрудника при исполнении" aria-label="Опишите ситуацию" autocomplete="off">
+      <button id="send" type="button">Спросить</button>
+    </div>
+  </section>
+
+  <div class="mega" id="mega" aria-hidden="true">SAN ANDREAS</div>
+  <footer>
+    <div>Справочник составлен по тексту кодексов и Устава с форума сервера. Тексты в частях сокращены там, где это отмечено.</div>
+    <div style="margin-top:8px">Это справка по тексту, а не официальное решение. Окончательную квалификацию даёт прокуратура или суд.</div>
+    <div class="credit">Сайт создан: Salari_Rakuzan</div>
+  </footer>
+</main>
+
+<script>
+/* parts: массив частей; строка — текст части, объект {h, items} — части с перечнем */
+const DOCS = [
+  { id: "procedure", name: "Процессуальный кодекс", chips: [], items: [
+    { n: "Ст. 1", t: "Цели Процессуального кодекса", parts: [
+      "Защита прав и законных интересов лиц и организаций, потерпевших от правонарушений.",
+      "Защита личности от незаконного и необоснованного обвинения, осуждения, ограничения её прав и свобод."] },
+    { n: "Ст. 2", t: "Законность при производстве по делам", parts: [
+      "Суд, прокурор, сотрудники правоохранительных органов и другие лица не вправе применять закон, противоречащий настоящему Кодексу.",
+      "Установив несоответствие закона или иного нормативного акта настоящему Кодексу, они принимают решение в соответствии с настоящим Кодексом.",
+      "Определения суда и постановления судьи, прокурора должны быть законными, обоснованными и мотивированными."] },
+    { n: "Ст. 3", t: "Уважение чести и достоинства личности", parts: [
+      "Запрещаются действия и решения, унижающие честь человека, а также обращение, унижающее его достоинство либо создающее опасность для жизни и здоровья.",
+      "Никто не может подвергаться насилию, пыткам или другому жестокому обращению."] },
+    { n: "Ст. 4", t: "Неприкосновенность жилища", parts: [
+      "Осмотр жилища производится только с согласия проживающих в нём лиц или на основании судебного акта.",
+      "Обыск жилища и частной собственности производится при наличии судебного решения или ордера. В исключительных случаях, когда обыск не терпит отлагательства, он может быть проведён на основании решения сотрудника без ордера; не позднее 1 часа с начала действия сотрудник уведомляет прокурора.",
+      "Обыск нежилого имущества (гаража) по ордеру выдают суд, Генеральный прокурор или его заместитель."] },
+    { n: "Ст. 5", t: "Тайна переписки и переговоров", parts: [
+      "Ограничение тайны переписки, телефонных и иных переговоров допускается только на основании судебного акта."] },
+    { n: "Ст. 6", t: "Презумпция невиновности", parts: [
+      "Обвиняемый считается невиновным, пока его виновность не доказана в порядке, установленном Кодексом.",
+      "Подозреваемый или обвиняемый не обязан доказывать свою невиновность. Бремя доказывания лежит на стороне обвинения.",
+      "Все неустранимые сомнения в виновности толкуются в пользу обвиняемого.",
+      "Обвинительный приговор не может быть основан на предположениях."] },
+    { n: "Ст. 7", t: "Свобода оценки доказательств", parts: [
+      "Судья, присяжные, прокурор и сотрудники правоохранительных органов оценивают доказательства по внутреннему убеждению, основанному на совокупности имеющихся доказательств, руководствуясь законом и совестью.",
+      "Никакие доказательства не имеют заранее установленной силы."] },
+    { n: "Ст. 8", t: "Охрана прав и свобод человека и гражданина", parts: [
+      "Суд, прокурор и сотрудники обязаны разъяснять участникам их права, обязанности и ответственность и обеспечивать возможность их осуществления.",
+      "При угрозе убийством или насилием в отношении участника производства принимаются меры безопасности.",
+      "Незаконно задержанного или лишённого свободы необходимо немедленно освободить.",
+      "Задержанный или заключённый содержится в условиях, исключающих угрозу его жизни и здоровью.",
+      "Должностные лица обязаны обеспечить ознакомление с документами, непосредственно затрагивающими права, если иное не предусмотрено законом."] },
+    { n: "Ст. 9", t: "Право на обжалование", parts: [
+      "Действия и решения суда, прокурора могут быть обжалованы в порядке, установленном законом.",
+      "Каждый осуждённый имеет право на пересмотр приговора вышестоящим судом.",
+      "Гражданин вправе подать жалобу на сотрудника руководителю ведомства. При признаках правонарушения руководитель направляет материалы в Офис Генерального прокурора.",
+      "Гражданин вправе обратиться с жалобой на сотрудника в Офис Генерального прокурора, после чего начинается прокурорская проверка.",
+      "На обжалование действий сотрудников правоохранительных органов даётся 48 часов с момента задержания или вынесения наказания; после этого решения вступают в силу.",
+      "Действия государственных органов можно обжаловать в административном порядке в течение 48 часов путём подачи иска в суд."] },
+    { n: "Ст. 10", t: "Неприкосновенность личности", parts: [
+      "Никто не может быть задержан по подозрению, арестован или заключён под стражу без законных оснований, предусмотренных Кодексом."] },
+    { n: "Ст. 11", t: "Доказательства", parts: [
+      "Доказательствами являются любые сведения, на основе которых устанавливаются обстоятельства, подлежащие доказыванию.",
+      { h: "В качестве доказательств допускаются:", items: ["показания подозреваемого и обвиняемого;", "показания потерпевшего и свидетеля;", "заключение и показания эксперта или специалиста;", "вещественные доказательства;", "протоколы следственных и судебных действий;", "иные документы;", "сообщение диспетчера о преступлении — в части сведений, источник которых установлен."] }] },
+    { n: "Ст. 12", t: "Недопустимые доказательства", parts: [
+      "Доказательства, полученные с нарушением Кодекса, недопустимы, не имеют юридической силы и не могут использоваться для доказывания.",
+      { h: "К недопустимым относятся:", items: [
+        "любая информация, полученная от задержанного до зачтения ему прав, даже если она записана на видео;",
+        "показания потерпевшего или свидетеля, основанные на догадке, предположении или слухе, либо без указания источника осведомлённости;",
+        "улики, добытые незаконным путём (например, изъятие без ордера на обыск личного транспорта);",
+        "материалы, полученные без видеофиксации, которую обязан вести сотрудник (ст. 23 и 29)."] },
+      "Исключения: материалы внедрения или работы под прикрытием; записи камер государственных органов и городских камер; материалы, приложенные к обращению гражданина; материалы с территории военной базы и авианосца, где фиксация ограничена законом о Национальной гвардии."] },
+    { n: "Ст. 13", t: "Доказывание", parts: [
+      "Доказывание состоит в собирании, проверке и оценке доказательств для установления обстоятельств дела.",
+      { h: "Подлежат доказыванию:", items: ["событие преступления (время, место, способ);", "виновность, форма вины и мотивы;", "характер и размер вреда;", "обстоятельства, смягчающие и отягчающие наказание;", "обстоятельства, влекущие освобождение от ответственности;", "обстоятельства, способствовавшие преступлению."] }] },
+    { n: "Ст. 14", t: "Правила оценки доказательств", parts: [
+      "Каждое доказательство оценивается с точки зрения относимости, допустимости и достоверности, а совокупность — с точки зрения достаточности для разрешения дела."] },
+    { n: "Ст. 15", t: "Задержание", parts: [
+      "Задержание — кратковременное лишение свободы на срок до 1 часа, которое проводят сотрудники правоохранительных органов и военнослужащие Национальной гвардии в порядке ст. 16 и 20.3 с последующей передачей в LSPD, LSCSD или FIB.",
+      "Задержание сотрудником Weazel News на территории редакции или при непосредственном преследовании длится не более 15 минут. Оно не является арестом и не влечёт назначения наказания."] },
+    { n: "Ст. 16", t: "Задержание подозреваемого", parts: [
+      "Лицо может быть задержано по подозрению в правонарушении, за которое предусмотрено лишение свободы или иная санкция.",
+      { h: "Основания — достаточно одного из следующих:", items: [
+        "лицо застигнуто на месте правонарушения сотрудником;",
+        "на нём, его одежде, при нём или в жилище обнаружены явные следы правонарушения;",
+        "есть фото- или видеофиксация правонарушения этим лицом;",
+        "есть нормативный документ, требующий задержания;",
+        "есть требование генерального прокурора или его заместителей о задержании;",
+        "есть ориентировка на транспортное средство или лицо;",
+        "лицо находится в базе розыска."] },
+      "При сокрытии личности в общественном месте сотрудник LSPD или LSCSD вправе потребовать снять маску. Отказ влечёт временное ограничение свободы до установления личности.",
+      "Нахождение в базе розыска подтверждает нарушение, указанное в розыске, и является основанием для задержания. Розыск, объявленный другим сотрудником, подлежит дополнительной проверке.",
+      "Задержание не допускается: в отношении погибшего на лечении; внутри медучреждения по основанию розыска; в отношении родственников или связанных лиц, если задержание не обусловлено конкретным правонарушением каждого."] },
+    { n: "Ст. 17", t: "Порядок задержания", parts: [
+      { h: "Ч. 1. Задержание при ведении следствия — последовательность:", items: [
+        "надеть наручники;",
+        "предъявить документ, нашивку, жетон или иной знак принадлежности к правоохранительным органам;",
+        "по усмотрению сотрудника провести первичный обыск;",
+        "разъяснить основания, зачитать правило Миранды, установить уровень розыска;",
+        "доставить подозреваемого в КПЗ или на место следствия при необходимости;",
+        "провести идентификацию и проверку, не относится ли задержанный к госорганам;",
+        "реализовать права задержанного; если он госслужащий — уведомить органы по ст. 19;",
+        "провести следственные действия при необходимости;",
+        "доставить задержанного в место заключения под стражу."] },
+      { h: "Ч. 2. Задержание по ордеру или нормативному документу — последовательность:", items: [
+        "надеть наручники;",
+        "предъявить знак принадлежности к правоохранительным органам;",
+        "по усмотрению провести первичный обыск;",
+        "разъяснить основания, зачитать правило Миранды, установить уровень розыска;",
+        "разъяснить номер и название документа-основания;",
+        "доставить в место заключения под стражу;",
+        "провести идентификацию и проверку принадлежности к госорганам;",
+        "реализовать право на телефонный звонок;",
+        "если задержанный госслужащий — уведомить Офис Генерального прокурора по ст. 19."] },
+      { h: "Ч. 3. Правило Миранды:", items: [] },
+      "«Вы имеете право хранить молчание. Всё, что вы скажете, может и будет использовано против Вас. Вы имеете право на один телефонный звонок. Также Вы имеете право на одного адвоката. Вы понимаете свои права?»",
+      { h: "Ч. 4. Право на адвоката:", items: [
+        "задержанный вправе вызвать адвоката; права предоставляются по очереди, затягивать их нельзя;",
+        "адвокат реализуется только в специально отведённых помещениях (КПЗ и допросные);",
+        "сотрудник обязан уточнить, нужен государственный или частный адвокат;",
+        "государственный адвокат вызывается через приложение «Контакты» → «Правительство»; если не принял вызов за 3 минуты, задержанному дают вызвать адвоката самому;",
+        "частный адвокат, не принявший вызов или не прибывший за 7 минут, — задержанный вправе запросить государственного;",
+        "если никто не прибыл за 7 минут, задержание продолжается, право считается реализованным;",
+        "молчание считается отказом от адвоката только при устном повторном вопросе и фиксации на видео."] },
+      { h: "Ч. 5. Телефонный звонок задержанного:", items: [
+        "инициатор обязан дать позвонить с телефона задержанного;",
+        "разговор не длиннее 2 минут; инициатор или напарник рядом."] },
+      "Первичный обыск направлен на поиск колюще-режущих предметов, оружия, наркотиков и взрывчатки. Правило Миранды зачитывается один раз. Порядок отдельных пунктов может меняться по усмотрению сотрудника.",
+      { h: "Ч. 6. Установление личности:", items: [
+        "надеть наручники и объявить: «Вы задержаны до установления Вашей личности»;",
+        "представиться;",
+        "снять маску и смыть мешающие опознанию вещества (грим не считается);",
+        "установить личность по документам и фотороботу; при их отсутствии — доставить в участок, снять отпечатки, проверить через базу штата;",
+        "основание процедуры: отказ предъявить документы."] }] },
+    { n: "Ст. 17.1", t: "Плановая доставка в КПЗ штаб-квартиры FIB", parts: [
+      "Доставка допускается только после приглашения от уполномоченного сотрудника FIB.",
+      "Запрос направляется только по рации департамента. Личные сообщения, звонки и иные каналы не являются надлежащим запросом.",
+      "Запрос должен содержать подразделение, позывные, данные задержанного, основание, цель и время прибытия.",
+      "Приглашение подтверждают директор или заместитель директора FIB либо уполномоченный сотрудник при исполнении, явно по рации.",
+      "Приглашение действует до завершения действий, но не более 60 минут, и только для указанного задержанного.",
+      "Приглашение может быть отозвано с объявлением по рации и указанием причины.",
+      "Если приглашения нет или нет ответа по рации, выбирается другое законное место. Отсутствие ответа не является приглашением и не продлевает задержание.",
+      "Требование приглашения не применяется при исполнении ордера, пресечении преступления или угрозе жизни и здоровью."] },
+    { n: "Ст. 18", t: "Субъекты задержания", parts: [
+      "В задержании участвуют: сотрудник, его напарник (не более двух), задержанный, один адвокат с помощником, один представитель руководства задержанного госслужащего, ведущий прокурор с помощником и сотрудник Офиса Генерального прокурора.",
+      "Иные лица могут наблюдать за задержанием, но не вмешиваться. Если они мешают, сотрудник вправе потребовать покинуть помещение или отойти на 5 метров."] },
+    { n: "Ст. 19", t: "Уведомление о задержании госслужащего", parts: [
+      "При задержании госслужащего сотрудник обязан незамедлительно вызвать сотрудника Офиса Генерального прокурора в КПЗ или допросную. Уведомление начальства — право сотрудника.",
+      "Со дня принятия вызова срок задержания приостанавливается до прибытия. Если вызов не принят, задержанного освобождают, а материалы в течение 48 часов направляют в Офис Генерального прокурора.",
+      "Прокурор оценивает правомерность задержания и соразмерность санкции. Без установленного нарушения задержанного освобождают.",
+      "Пока руководство не получило мотивированного решения прокурора, к задержанному нельзя применять дисциплинарные меры, кроме случаев с ордером на арест или вступившим в силу решением суда."] },
+    { n: "Ст. 20", t: "Основания освобождения подозреваемого", parts: [
+      { h: "Ч. 1. Подозреваемого освобождают, если:", items: [
+        "подозрение не подтвердилось;",
+        "за нарушение не предусмотрено лишение свободы, штраф или иная санкция, либо санкция уже исполнена;",
+        "задержание проведено с нарушением ч. 2 ст. 16;",
+        "прошёл 1 час с момента задержания, а мера не избрана."] },
+      { h: "Ч. 2. Срок в 1 час приостанавливается при:", items: [
+        "допросе;",
+        "вызове и разбирательстве с адвокатом;",
+        "вызове и разбирательстве с Офисом Генерального прокурора (и начальством госслужащего);",
+        "обыске имущества задержанного;",
+        "установлении личности (не более 5 минут);",
+        "приводе (не более 15 минут);",
+        "задержании по розыску ОРМ (не более 15 минут)."] },
+      "Общая продолжительность приостановок, кроме допроса, не может превышать 45 минут. По истечении срока задержанного освобождают."] },
+    { n: "Ст. 20.1", t: "Вызов прокурора по требованию адвоката", parts: [
+      "Если адвокат не согласен с отказом освободить задержанного, он вправе потребовать вызова прокурора, ссылаясь на основания освобождения.",
+      "Адвокат может самостоятельно вызвать сотрудника Офиса Генерального прокурора при признаках нарушения со стороны госслужащего.",
+      "Сотрудник обязан обеспечить вызов и не препятствовать ему.",
+      "До прибытия прокурора процедура ареста и помещения в камеру не допускается.",
+      "Прокурор рассматривает доводы адвоката, принимает мотивированное решение и при признаках нарушения принимает меры.",
+      "Если прокурор не принял вызов или не прибыл за 7 минут, задержание продолжается."] },
+    { n: "Ст. 22", t: "Права задерживаемого", parts: [
+      { h: "Ч. 1. У подозреваемого есть права:", items: [
+        "один телефонный звонок при задержании и один перед допросом, в присутствии сотрудника, до 2 минут;",
+        "на адвоката;",
+        "хранить молчание;",
+        "заявлять ходатайства и отводы."] },
+      { h: "Ч. 2. Права на допросе:", items: [
+        "знать, в чём он подозревается, и получить копию постановления о возбуждении дела;",
+        "давать показания или отказаться от них (при даче показаний предупреждают, что их могут использовать и после отказа от них);",
+        "пользоваться помощью защитника;",
+        "конфиденциальное свидание с защитником до начала допроса (не менее 2 часов);",
+        "знакомиться с протоколами и подавать на них замечания;",
+        "приносить жалобы на действия прокурора, следователя и дознавателя;",
+        "быть извещённым о фото- и видеозаписи допроса."] }] },
+    { n: "Ст. 23", t: "Обязанности сотрудника при задержании", parts: [
+      { h: "Ч. 1. Сотрудник, выполняющий задержание, обязан:", items: [
+        "вести видеозапись задержания;",
+        "разъяснить адвокату причины задержания и по требованию предоставить видеофиксацию;",
+        "при задержании госслужащего разъяснить причины адвокату, прокурору и начальству и по требованию предоставить видеофиксацию;",
+        "поместить задержанного в камеру."] },
+      "Ч. 2. Срок ареста определяется санкцией статьи. За каждый уровень розыска добавляется 10 месяцев лишения свободы. Общий срок ареста не может превышать 50 месяцев."] },
+    { n: "Ст. 25", t: "Порядок проведения ареста", parts: [
+      { h: "Порядок ареста строго следующий:", items: [
+        "вторичный обыск;",
+        "изъятие всех нелегальных предметов;",
+        "при необходимости разъяснить причину ареста;",
+        "поместить в камеру."] }] },
+    { n: "Ст. 28", t: "Иные меры процессуального принуждения", parts: [
+      "Прокурор или суд вправе применить к подозреваемому или обвиняемому: обязательство о явке, привод, наложение ареста на имущество, денежное взыскание.",
+      "К свидетелю, потерпевшему, эксперту и другим участникам — обязательство о явке, привод, денежное взыскание.",
+      "Привод подозреваемого на допрос или в суд сопровождается наручниками, предъявлением знака, идентификацией личности и уведомлением лица, выдавшего ордер. Если выдавший ордер не отвечает по рации 15 минут, подозреваемого освобождают.",
+      "Офис Генерального прокурора и суд вправе отстранить от служебных обязанностей и запретить увольнение или перевод при возбуждении дела, принятии иска или по ходатайству участника. Губернатора и руководителей госорганов может отстранить только Верховный суд."] },
+    { n: "Ст. 31", t: "Выпуск под залог", parts: [
+      "Сумма залога — не менее $25 000; за каждый уровень розыска добавляется $25 000.",
+      "Выпуск под залог невозможен, если статья для ареста предусматривает судимость.",
+      "При задержании госслужащего сумму залога устанавливает сотрудник Офиса Генерального прокурора."] },
+    { n: "Ст. 51", t: "Допрос", parts: [
+      "Допрос проводят сотрудники LSPD, LSCSD и FIB, а также прокурор по постановлению или повестке.",
+      "Допрос не может длиться более 1 часа.",
+      "Перед допросом разъясняются конституционные и процессуальные права.",
+      "Во время допроса ведётся аудио- или видеопротокол.",
+      { h: "Основания для допроса:", items: [
+        "задержание участника перестрелки после неё;",
+        "совокупность трёх и более преступных деяний;",
+        "деяния по ст. 6.2, 6.4, 6.7, 7.1–7.3, 12.1, 12.1.1, 12.1.2, 12.4, 12.5, 12.8, 15.4, 15.5, 15.7, 16.5, 16.6, 17.1, 17.2, 18.3 УК;",
+        "постановление правомочного лица при открытом производстве."] }] },
+    { n: "Ст. 66.3", t: "Сроки предварительного расследования", parts: [
+      "Предварительное расследование заканчивается не позднее 5 дней со дня возбуждения дела.",
+      "В исключительных случаях срок может быть продлён по решению Генерального прокурора или его заместителей.",
+      "Продление возможно при необходимости дополнительных действий или объективных обстоятельствах; на одно решение — до 48 часов.",
+      "Если срок истёк без оснований для продления, расследование заканчивается: дело направляется в прокуратуру или прекращается.",
+      "Бездействие следователя, повлекшее пропуск срока, влечёт ответственность по закону."] },
+    { n: "Ст. 68", t: "Задержание для оперативно-розыскных мероприятий", parts: [
+      "Задержание для ОРМ возможно только при достаточных основаниях о причастности лица к преступлению.",
+      "Если задержание нельзя начать сразу, оно допускается по ордеру типа «AS» по запросу уполномоченного лица.",
+      "Если задержан не инициатор розыска, задержавший обязан сообщить ему; инициатор в течение 5 минут подтверждает готовность прибыть. Если он не прибыл за 10 минут, действия могут продолжить задержавшие при достаточных доказательствах.",
+      "Без достаточных доказательств лицо подлежит немедленному освобождению.",
+      "Нарушение порядка делает доказательства недопустимыми и влечёт ответственность виновных."] },
+    { n: "Ст. 69", t: "Защита процессуальных действий сотрудника", parts: [
+      "Сотрудник, задерживающий должностное лицо, не может быть задержан другим сотрудником до завершения задержания.",
+      "Если его задержали, задержание прекращается, а сотрудник освобождается для завершения действий.",
+      "Искусственные процессуальные действия для ухода от ответственности запрещены. Их квалифицирует только прокурор, принявший вызов, или вышестоящий руководитель."] }
+  ]},
+  { id: "lspd", name: "Устав LSPD", chips: [], items: [
+    { n: "Гл. I, ст. 1.1–1.7", t: "Общие положения Устава", parts: [
+      "Устав общеобязателен для всех сотрудников Полицейского департамента.",
+      "Устав вступает в силу с момента публикации на портале Штата.",
+      "Сотрудник обязан соблюдать Устав, внутренние регламенты и распоряжения отделов.",
+      "Поправки вносят только действующий Шеф LSPD и его Заместители.",
+      "Если в статье не указан вид взыскания, он назначается на усмотрение Шефа или его Заместителей.",
+      "Запрещено пользоваться уязвимостью Устава, в том числе дословной трактовкой нормы без понимания её применения, чтобы избежать наказания.",
+      "Шеф и его Заместители вправе исполнять обязанности любого отдела при исполнении служебных обязанностей."] },
+    { n: "Гл. I", t: "Структура департамента и отделы", parts: [
+      { h: "Отделы:", items: ["Police Academy (PA) — кадеты, ранги 1–2", "Police Academy Instructor (PAI) — набор, обучение, экзамены, переаттестация", "Central Patrol Division (CPD) — патрули, вызовы граждан", "Internal Affairs Division (IAD) — внутренний контроль и дисциплина", "Detective Bureau (DB) — расследования, контрольные закупки, допросы", "Canine (K-9) — пресечение наркотрафика, служебные собаки", "Special Weapons And Tactics (SWAT) — быстрое реагирование и зачистка", "Air Force (AF) — поддержка с воздуха"] }] },
+    { n: "Гл. I", t: "Соотношение должностей и рангов", parts: [
+      { h: "Руководящий состав:", items: ["17 — Chief", "16 — Deputy Chief", "15 — Advisor Chief"] },
+      { h: "Руководство отделов:", items: ["13 — Assistant Chief", "12 — Curator of Department", "11 — Head of Department", "10 — Deputy Head of Department"] },
+      { h: "Средний состав:", items: ["10 — Free Inspector", "9 — Instructor of Department", "8 — Major", "7 — Captain", "6 — Lieutenant", "5 — Junior Lieutenant", "4 — Sergeant"] },
+      { h: "Младший состав:", items: ["3 — Officer", "2 — Junior Officer", "1 — Cadet"] }] },
+    { n: "Гл. II, ст. 2.1", t: "Рабочий день", parts: [
+      "Рабочий день начинается в 10:00 и заканчивается в 00:00.",
+      "В выходные (сб–вс) рабочий день с 12:00 до 22:00."] },
+    { n: "Гл. II, ст. 2.3", t: "Обеденный перерыв", parts: [
+      "Перерыв на обед — от 1 до 2 часов.",
+      "Если сотрудник на службе более 6 часов, он вправе взять дополнительный перерыв до 2 часов сверх обеденного.",
+      "При уходе на обед или перерыв сотрудник обязан отписать отчёт в специальный канал."] },
+    { n: "Гл. II, ст. 2.4", t: "Отпуск", parts: [
+      "Каждый сотрудник имеет право на 7 дней отпуска. Если отсутствие длится дольше, он уволен с правом восстановления, если с момента увольнения прошло не более 30 дней.",
+      "Не вернувшийся с отпуска в течение 7 дней после его окончания будет уволен.",
+      "Исключение: разрешение Шефа или его Заместителей на длительный отпуск."] },
+    { n: "Гл. II, ст. 2.5–2.6", t: "Опознавательные знаки и вызов в рабочее время", parts: [
+      "Запрещено заступать на смену без опознавательных знаков. Наказание: строгий выговор или увольнение. Исключение — сотрудники DB при работе под прикрытием.",
+      "Старший состав вправе вызвать любого сотрудника в рабочее время."] },
+    { n: "Гл. III, ст. 3.1–3.3", t: "Штатный состав и подчинение", parts: [
+      "Высшее должностное лицо — Шеф. Его приказы и приказы Заместителей обязательны для всех.",
+      "Руководящий состав — Шеф и его Заместители.",
+      "Старший состав: адвизоры, ассистенты шефа, кураторы отделов, начальники отделов и заместители начальников.",
+      "Приказы старшего состава внутри отдела обязательны. При отсутствии старшего состава сотрудники подчиняются старшему составу других отделов. Исключение: IAD и DB подчиняются только своему руководству, Шефу и Заместителям."] },
+    { n: "Гл. IV, ст. 4.2", t: "Виды дисциплинарных взысканий", parts: [
+      { h: "Взыскания:", items: ["устный выговор;", "строгий выговор;", "два строгих выговора;", "переаттестация;", "понижение;", "увольнение."] },
+      "Срок на отработку или обжалование строгого выговора — 72 часа; устного — 48 часов. На переаттестацию даётся 48 часов и 3 попытки; без её прохождения сотрудник увольняется."] },
+    { n: "Гл. IV, ст. 4.9", t: "Три строгих выговора", parts: [
+      "Получение трёх строгих выговоров приводит к понижению или увольнению.",
+      "Увольнение разрешено только с одобрения руководства Департамента."] },
+    { n: "Гл. IV, ст. 4.11", t: "Ограничения при наличии взыскания", parts: [
+      "Наличие действующего взыскания препятствует повышению, переводу между отделами и премированию.",
+      "Два строгих выговора у кадета ведут к увольнению."] },
+    { n: "Гл. V, ст. 5.1–5.2", t: "Запреты: приказы и беспристрастность", parts: [
+      "Запрещено игнорировать приказы старшего состава и регламенты спецсвязи. Наказание: строгий выговор, понижение или увольнение.",
+      "Запрещено предвзятое отношение к сотрудникам и гражданам. Сотрудник обязан быть беспристрастным."] },
+    { n: "Гл. V, ст. 5.15.1", t: "Запрет порочить честь Департамента", parts: [
+      "Запрещено порочить честь и достоинство Департамента. Наказание: строгий выговор, понижение или увольнение.",
+      "Примечание: нецензурная брань при общении с гражданами или коллегами, оскорбления, насмешки, хамство и провокационное поведение."] },
+    { n: "Гл. V, ст. 5.30", t: "Нарушение законодательства при службе", parts: [
+      "Запрещено в ходе служебной деятельности нарушать законодательство штата. Наказание: строгий выговор, понижение или увольнение."] },
+    { n: "Гл. VI, ст. 6.2", t: "Правила поведения в строю", parts: [
+      "В строю запрещено: разговаривать, танцевать, шуметь, включать музыку; покидать строй без разрешения; доставать телефон и рацию (кроме разрешения организатора); отвлекаться; есть и пить (кроме угрозы жизни); жестикулировать руками.",
+      "Наказание: устный или строгий выговор. Мешать строю другого отдела — строгий выговор."] },
+    { n: "Гл. VIII, ст. 8.2", t: "Специальные операции с заложниками", parts: [
+      "Операции по освобождению заложников проводятся только при наличии переговорщика.",
+      "Переговорщиками могут быть старший состав, сотрудники DB и уполномоченные руководством лица.",
+      "Приказ на штурм отдаёт старший состав или переговорщик."] },
+    { n: "Гл. IX, ст. 9.2–9.6", t: "Выдача лицензий на оружие", parts: [
+      "Выдавать лицензии могут сотрудники PAI, лицензеры и Assistant Chief и выше.",
+      "Лицензию нельзя выдавать гражданам с действующей судимостью или без действующих медсправок.",
+      { h: "Порядок выдачи:", items: ["проверить документы и медсправки;", "проверить судимости по базе;", "провести экзамен по закону об обороте оружия;", "пополнить казну Департамента на сумму, установленную законом, с отчётностью."] }] },
+    { n: "Гл. X, ст. 10.2–10.4", t: "Приём на службу", parts: [
+      "Нельзя отказывать в собеседовании, если есть действующие медсправки, военный билет и нет судимости.",
+      { h: "Порядок собеседования:", items: ["проверить документы, медсправки и военный билет;", "проверить судимости — принимать с судимостью запрещено;", "проверить по чёрному списку — при наличии запрещено принимать;", "провести теоретический экзамен на вменяемость и знание законов штата;", "подписать трудовой договор;", "оформить документацию о приёме."] }] }
+  ]},
+  { id: "criminal", name: "Уголовный кодекс", chips: ["F","R","S","U","N"], items: [
+    { n: "2.7", t: "Категории преступлений", tags: [], p: "небольшой (до 20 мес.), средней (до 30 мес.), тяжкие (40–49 мес.), особо тяжкие (от 50 мес.)" },
+    { n: "6.1", t: "Умышленное нанесение особо тяжких телесных повреждений", tags: ["R","S"], p: "40 мес." },
+    { n: "6.2", t: "Убийство", tags: ["F","S"], p: "50 мес." },
+    { n: "6.3", t: "Умышленное причинение вреда здоровью", tags: ["F","R"], p: "от 30 мес. или $50 000–$100 000" },
+    { n: "8.1", t: "Изнасилование", tags: ["R","S"], p: "40 мес." },
+    { n: "10.1", t: "Кража (свыше $15 000)", tags: ["R","U"], p: "30 мес." },
+    { n: "10.3", t: "Грабеж", tags: ["F","R"], p: "30 мес." },
+    { n: "10.4", t: "Разбой", tags: ["F","R","S"], p: "40 мес." },
+    { n: "10.5", t: "Угон транспорта", tags: ["R","F"], p: "30 мес." },
+    { n: "12.1", t: "Терроризм", tags: ["F","S"], p: "50 мес." },
+    { n: "12.8", t: "Незаконный оборот оружия", tags: ["F","R","S"], p: "50 мес. или $50 000–$100 000" },
+    { n: "13.2", t: "Наркотики от 3 г", tags: ["F","R","S"], p: "40 мес." },
+    { n: "13.2.1", t: "Наркотики свыше 25 г или со сбытом", tags: ["F","R","S"], p: "50 мес." },
+    { n: "15.4", t: "Получение взятки", tags: ["F","R","S"], p: "50 мес." },
+    { n: "15.5", t: "Дача взятки", tags: ["F","R","S"], p: "50 мес." },
+    { n: "16.4", t: "Заведомо незаконное задержание", tags: ["F","S"], p: "50 мес. или $50 000" },
+    { n: "16.12", t: "Уклонение от расследования и суда", tags: ["F","R","S"], p: "40 мес." },
+    { n: "17.1", t: "Посягательство на жизнь сотрудника", tags: ["F","R","S"], p: "50 мес." },
+    { n: "17.2", t: "Насилие в отношении сотрудника при исполнении", tags: ["F","R","S"], p: "40 мес. (угроза — 30 мес.)" },
+    { n: "17.3", t: "Публичное оскорбление представителя власти", tags: ["F","R"], p: "30 мес. или $50 000" },
+    { n: "17.6", t: "Неповиновение законному требованию", tags: ["R","F"], p: "30 мес. или $30 000" },
+    { n: "17.9", t: "Воспрепятствование задержанию", tags: ["F","R"], p: "40 мес. или $50 000" },
+    { n: "19.1", t: "Нарушение правил безопасности движения и эксплуатации воздушного транспорта, повлёкшее по неосторожности тяжкие телесные повреждения", tags: ["F","R"], p: "30 мес. лишения свободы" },
+    { n: "19.2", t: "Нарушение правил безопасности движения и эксплуатации воздушного транспорта, повлёкшее по неосторожности смерть человека", tags: ["F","S"], p: "40 мес. лишения свободы" },
+    { n: "19.3", t: "Нарушение правил безопасности движения и эксплуатации воздушного транспорта, повлёкшее по неосторожности смерть двух и более лиц", tags: ["F","S"], p: "50 мес. лишения свободы" },
+    { n: "19.4", t: "Угон воздушного транспорта, в том числе завладение им без разрешения руководства", tags: ["F","S"], p: "40 мес. лишения свободы или штраф $30 000–$40 000" },
+    { n: "20", t: "Систематическое невыполнение функций при санитарно-эпидемиологических проверках работников организации (руководитель или заместители; систематическим считается два и более раза)", tags: ["F","R"], p: "40 мес. лишения свободы" }
+  ]}
+];
+
+/* Части статей Уголовного кодекса (по тексту с форума) */
+const CRIM_PARTS = {
+  '2.7': [
+    'ч. 1. В зависимости от характера и степени общественной опасности деяния подразделяются на преступления небольшой тяжести, средней тяжести, тяжкие и особо тяжкие.',
+    'ч. 2. Небольшой тяжести — умышленные и неосторожные деяния, максимальное наказание за которые не превышает 20 месяцев лишения свободы.',
+    'ч. 3. Средней тяжести — умышленные и неосторожные деяния, максимальное наказание за которые не превышает 30 месяцев лишения свободы.',
+    'ч. 4. Тяжкие — умышленные и неосторожные деяния, минимальное наказание за которые составляет 40 месяцев, но не превышает 49 месяцев.',
+    'ч. 5. Особо тяжкие — только умышленные деяния, наказание за которые свыше и включая 50 месяцев лишения свободы.',
+    'ч. 6. При смягчающих обстоятельствах и отсутствии отягчающих суд или Офис Генерального прокурора вправе изменить категорию преступления на менее тяжкую.'
+  ],
+  '8.1': [
+    'ч. 1. Изнасилование, то есть половое сношение с применением насилия или с угрозой его применения, либо с использованием беспомощного состояния потерпевшей.',
+    { h: 'Наказание: 40 месяцев лишения свободы.', items: [] },
+    { h: 'ч. 2. Изнасилование:', items: ['а) совершенное группой лиц, группой лиц по предварительному сговору или организованной группой;', 'б) соединённое с угрозой убийством или причинением тяжкого вреда здоровью, а также совершённое с особой жестокостью;', 'в) повлёкшее по неосторожности смерть потерпевшего.'] },
+    { h: 'Наказание: 40 месяцев лишения свободы.', items: [] }
+  ],
+  '12.8': [
+    'ч. 1. Незаконные приобретение, изготовление, хранение, ношение, перевозка, передача, сбыт, использование или хищение оружия, его комплектующих, боеприпасов, спецсредств, взрывчатых веществ или взрывных устройств, совершённые любым лицом, включая госслужащего. Действия госслужащего со служебным оружием вне служебных обязанностей также признаются незаконными.',
+    'Примечание: использование предмета не требует дополнительного вменения его одновременного хранения или ношения. Хранение и перевозка похищенного предмета, непосредственно связанные с хищением, отдельно не квалифицируются.',
+    { h: 'Наказание: 50 месяцев лишения свободы или штраф от $50 000 до $100 000.', items: [] }
+  ],
+  '13.2': [
+    'Примечание: одно растение или его семя приравнивается к 1 грамму наркотического вещества. Сотрудники отдела K-9 и DEA при исполнении имеют право носить такие вещества, растения и семена.',
+    { h: 'Наказание: 40 месяцев лишения свободы.', items: [] }
+  ],
+  '15.6': [
+    'ч. 1. Халатность, то есть неисполнение или ненадлежащее исполнение должностным лицом своих обязанностей из-за недобросовестного или небрежного отношения к службе, повлёкшее крупный ущерб или существенное нарушение прав граждан или организаций.',
+    { h: 'Наказание: 30 месяцев лишения свободы или штраф от $30 000 до $50 000.', items: [] },
+    'ч. 2. То же деяние, повлёкшее по неосторожности тяжкий вред здоровью или смерть человека.',
+    { h: 'Наказание: 50 месяцев лишения свободы.', items: [] },
+    'ч. 3. То же деяние, повлёкшее по неосторожности смерть двух или более лиц.',
+    { h: 'Наказание: 50 месяцев лишения свободы.', items: [] },
+    'ч. 4. Халатность, выраженная в деструктивном общении, существенно нарушающем нормы этики и морали, как с гражданскими лицами, так и с другими госслужащими.',
+    { h: 'Наказание: 30 месяцев лишения свободы или штраф от $30 000 до $50 000.', items: [] }
+  ],
+  '17.1': [
+    'ч. 1. Посягательство на жизнь сотрудника правоохранительного органа или военнослужащего, совершённое в связи с исполнением ими своих обязанностей.',
+    'ч. 2. Посягательство на жизнь членов семьи или близких родственников такого сотрудника или военнослужащего в связи с выполнением ими обязанностей.',
+    'ч. 3. Посягательство на жизнь служебного животного, используемого в правоохранительных органах.',
+    { h: 'Наказание: ч. 1, ч. 2 — 50 месяцев; ч. 3 — 40 месяцев лишения свободы.', items: [] },
+    'ч. 4. Любое из вышеуказанных действий, совершённое из мести за исполнение должностных обязанностей.',
+    { h: 'Наказание: 50 месяцев лишения свободы.', items: [] }
+  ],
+  '17.2': [
+    'ч. 1. Применение насилия, не опасного для жизни или здоровья, в отношении сотрудника правоохранительных органов, военнослужащего или их близких в связи с исполнением обязанностей.',
+    { h: 'Наказание: 40 месяцев лишения свободы.', items: [] },
+    'ч. 2. Угроза применения насилия в отношении сотрудника, военнослужащего или их близких в связи с исполнением обязанностей.',
+    { h: 'Наказание: 30 месяцев лишения свободы.', items: [] },
+    'ч. 3. Применение насилия или угроза насилия в отношении служебного животного, используемого в правоохранительных органах.',
+    'ч. 4. Любое из вышеуказанных действий, совершённое из мести за исполнение должностных обязанностей.',
+    { h: 'Наказание по ч. 3 и ч. 4: 40 месяцев лишения свободы.', items: [] },
+    'Примечание: угрозы по ст. 17.2 не должны сами по себе подразумевать угрозу жизни. В противном случае деяние переквалифицируется по ст. 17.1.'
+  ],
+  '17.6': [
+    'ч. 1. Неповиновение или ненадлежащее исполнение законного требования или распоряжения сотрудника LSPD, LSCSD, USSS, FIB, SANG, GOV, а также сотрудника Weazel News (WN), уполномоченного на задержание.',
+    { h: 'Наказание: 30 месяцев лишения свободы или штраф $30 000.', items: [] }
+  ],
+  '17.9': [
+    'ч. 1. Попытка скрыться с места проведения задержания или ареста, совершённая задержанным.',
+    { h: 'Наказание: 40 месяцев лишения свободы или штраф $50 000.', items: [] },
+    'ч. 2. Воспрепятствование гражданским лицом процессу задержания или ареста, в том числе снятием наручников или иными умышленными действиями.',
+    { h: 'Наказание: 40 месяцев лишения свободы.', items: [] }
+  ]
+};
+DOCS.find(d => d.id === 'criminal').items.forEach(it => { if (CRIM_PARTS[it.n]) it.parts = CRIM_PARTS[it.n]; });
+
+const state = { doc: "procedure", q: "", code: "ALL" };
+const $ = id => document.getElementById(id);
+function esc(s) { return String(s).replace(/[&<>"']/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c])); }
+
+function partsHTML(parts) {
+  return parts.map((p, i) => {
+    if (typeof p === "string") {
+      return `<div class="part"><b>Ч. ${i + 1}.</b><p>${esc(p)}</p></div>`;
+    }
+    const list = p.items && p.items.length ? `<ul>${p.items.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : "";
+    return `<div class="part"><b>${esc(p.h)}</b>${list}</div>`;
+  }).join("");
+}
+
+function renderTabs() {
+  const t = $("tabs");
+  t.textContent = "";
+  DOCS.forEach(d => {
+    const b = document.createElement("button");
+    b.className = "tab";
+    b.setAttribute("role", "tab");
+    b.setAttribute("aria-selected", d.id === state.doc ? "true" : "false");
+    b.textContent = d.name;
+    b.addEventListener("click", () => { state.doc = d.id; state.code = "ALL"; render(); });
+    t.appendChild(b);
+  });
+}
+
+function render() {
+  renderTabs();
+  const doc = DOCS.find(d => d.id === state.doc);
+  const q = state.q.trim().toLowerCase();
+  const list = $("list");
+  list.textContent = "";
+
+  const items = doc.items.filter(it => {
+    const codes = it.tags || [];
+    const okCode = state.code === "ALL" || codes.includes(state.code);
+    const okQ = !q || it.n.toLowerCase().includes(q) || it.t.toLowerCase().includes(q);
+    return okCode && okQ;
+  });
+
+  items.forEach(it => {
+    const d = document.createElement("details");
+    d.className = "art";
+    if (q) d.open = true;
+    const tags = (it.tags || []).map(t => `<span class="tag">${esc(t)}</span>`).join("");
+    if (it.parts) {
+      d.innerHTML = `
+        <summary>
+          <div class="art-left">
+            <span class="num">${esc(it.n)}</span>
+            <span class="title">${esc(it.t)}</span>
+            <span class="pen">Частей: ${it.parts.length}</span>
+          </div>
+          <span class="caret" aria-hidden="true">+</span>
+        </summary>
+        <div class="parts">${partsHTML(it.parts)}</div>`;
+    } else {
+      d.innerHTML = `
+        <summary>
+          <div class="art-left">
+            <span class="num">Статья ${esc(it.n)}</span>
+            <span class="title">${esc(it.t)}</span>
+            <span class="pen">${esc(it.p)}</span>
+            ${tags ? `<span class="tags">${tags}</span>` : ""}
+          </div>
+          <span class="caret" aria-hidden="true">+</span>
+        </summary>`;
+    }
+    list.appendChild(d);
+  });
+
+  $("meta").textContent = `Найдено: ${items.length} из ${doc.items.length}`;
+  $("empty").style.display = items.length ? "none" : "block";
+}
+
+$("search").addEventListener("input", e => { state.q = e.target.value; render(); });
+$("expandAll").addEventListener("click", () => document.querySelectorAll("#list details").forEach(d => d.open = true));
+$("collapseAll").addEventListener("click", () => document.querySelectorAll("#list details").forEach(d => d.open = false));
+
+/* Помощник */
+const T = /сотрудн|полиц|офицер|шериф|копа|военн|агент|служб|исполнен|коллег|lspd|lscsd|fib|usss/;
+const HIT = /(?<![а-я])(удар|избил|избив|бил|драк|толкн|пнул|напад|нанес)/;
+const RULES = [
+  { when: t => HIT.test(t) && T.test(t), title: "Удар сотрудника при исполнении", text: "Статья 17.2, ч. 1: насилие, не опасное для жизни или здоровья, в отношении сотрудника в связи с исполнением обязанностей. Наказание: 40 месяцев. Если причинён тяжкий вред здоровью, могут добавиться статьи 6.1 или 6.3." },
+  { when: t => /угроз/.test(t) && T.test(t), title: "Угроза сотруднику", text: "Статья 17.2, ч. 2: угроза насилием в отношении сотрудника. Наказание: 30 месяцев." },
+  { when: t => /убил|убить|убийств|стрел|выстрел|покушен/.test(t) && T.test(t), title: "Посягательство на жизнь сотрудника", text: "Статья 17.1, ч. 1. Наказание: 50 месяцев." },
+  { when: t => /оскорб|обозвал|унизил|матом/.test(t) && T.test(t), title: "Оскорбление представителя власти", text: "Статья 17.3. Наказание: 30 месяцев или штраф $50 000." },
+  { when: t => /неповинов|не подчин|не выполн|проигнорир/.test(t), title: "Неповиновение", text: "Статья 17.6, ч. 1. Наказание: 30 месяцев или штраф $30 000." },
+  { when: t => /сбеж|убеж|побег|вырвал|скрыт|наручник|воспрепятств/.test(t), title: "Побег или воспрепятствование задержанию", text: "Статья 17.9. Наказание: 40 месяцев; по ч. 1 возможен штраф $50 000." },
+  { when: t => /угнал|угон/.test(t), title: "Угон транспорта", text: "Статья 10.5. Наказание: 30 месяцев." },
+  { when: t => /украл|кража|своровал/.test(t), title: "Кража", text: "Статья 10.1: хищение свыше $15 000. Наказание: 30 месяцев." },
+  { when: t => /ограб/.test(t), title: "Грабеж", text: "Статья 10.3. Наказание: 30 месяцев." }
+];
+function addMsg(role, blocks) {
+  const c = $("chat");
+  const d = document.createElement("div");
+  d.className = "msg " + role;
+  if (role === "user") d.textContent = blocks;
+  else blocks.forEach((b, i) => {
+    if (i) d.appendChild(document.createTextNode("\n\n"));
+    if (b.title) { const s = document.createElement("span"); s.className = "t"; s.textContent = b.title; d.appendChild(s); }
+    d.appendChild(document.createTextNode(b.text));
+  });
+  c.appendChild(d);
+  c.scrollTop = c.scrollHeight;
+}
+function answer(q) {
+  const t = q.toLowerCase().replace(/ё/g, "е");
+  const found = RULES.filter(r => r.when(t)).slice(0, 3);
+  if (!found.length) return [{ text: "Точного совпадения не нашёл. Опишите действие и того, кого оно касалось, например: «ударил сотрудника», «угнал машину»." }];
+  return found.map(r => ({ title: r.title, text: r.text }));
+}
+function ask(raw) {
+  const q = raw.trim();
+  if (!q) return;
+  addMsg("user", q);
+  addMsg("bot", answer(q));
+  $("q").value = "";
+  $("q").focus();
+}
+$("send").addEventListener("click", () => ask($("q").value));
+$("q").addEventListener("keydown", e => { if (e.key === "Enter") ask($("q").value); });
+addMsg("bot", [{ text: "Здравствуйте! Опишите ситуацию, и я подскажу статью и срок." }]);
+
+/* Тест по Уголовному кодексу */
+const QA = [
+  { n: '6.2', t: 'Убийство', d: 'Умышленное причинение смерти другому человеку.', p: '50 месяцев лишения свободы' },
+  { n: '6.7', t: 'Причинение смерти или тяжких телесных повреждений по неосторожности', d: 'Причинение смерти или тяжких телесных повреждений по неосторожности.', p: '30 месяцев лишения свободы' },
+  { n: '8.1', t: 'Изнасилование', d: 'Половое сношение с применением насилия или с угрозой его применения, либо с использованием беспомощного состояния потерпевшей.', p: '40 месяцев лишения свободы' },
+  { n: '10.1', t: 'Кража', d: 'Тайное хищение чужого имущества стоимостью свыше $15 000.', p: '30 месяцев лишения свободы' },
+  { n: '10.2', t: 'Мошенничество', d: 'Хищение чужого имущества или приобретение права на чужое имущество путём обмана или злоупотребления доверием.', p: '30 месяцев лишения свободы' },
+  { n: '10.3', t: 'Грабеж', d: 'Открытое хищение чужого имущества.', p: '30 месяцев лишения свободы' },
+  { n: '10.4', t: 'Разбой', d: 'Нападение в целях хищения чужого имущества, совершённое с применением насилия, опасного для жизни или здоровья, либо с угрозой его применения.', p: '40 месяцев лишения свободы' },
+  { n: '10.5', t: 'Угон транспортного средства', d: 'Неправомерное завладение автомобилем или иным транспортным средством.', p: '30 месяцев лишения свободы' },
+  { n: '13.3', t: 'Организация или вовлечение в занятие проституцией', d: 'Организация, а равно вовлечение в занятие проституцией или принуждение к продолжению занятия проституцией.', p: '30 месяцев лишения свободы' },
+  { n: '13.2.1', t: 'Незаконные приобретение, хранение, перевозка наркотиков свыше 25 г или со сбытом', d: 'Незаконные приобретение, хранение, перевозка наркотических средств свыше 25 грамм либо совершённые с целью сбыта.', p: '50 месяцев лишения свободы' },
+  { n: '15.4', t: 'Получение взятки', d: 'Получение должностным лицом, лично или через посредника, взятки в виде денег или иного имущества за совершение действий в пользу взяткодателя.', p: '50 месяцев лишения свободы' },
+  { n: '15.5', t: 'Дача взятки', d: 'Дача взятки должностному лицу лично или через посредника.', p: '50 месяцев лишения свободы' },
+  { n: '15.6', t: 'Халатность', d: 'Неисполнение или ненадлежащее исполнение должностным лицом своих обязанностей из-за небрежного отношения к службе, повлёкшее крупный ущерб или существенное нарушение прав граждан.', p: '30 месяцев лишения свободы или штраф $30 000–$50 000' },
+  { n: '16.11', t: 'Сокрытие или уничтожение улик', d: 'Сокрытие улик или уничтожение улик.', p: '40 месяцев лишения свободы' },
+  { n: '17.1', t: 'Посягательство на жизнь сотрудника правоохранительного органа', d: 'Посягательство на жизнь сотрудника правоохранительного органа или военнослужащего, совершённое в связи с исполнением ими своих обязанностей.', p: '50 месяцев лишения свободы' },
+  { n: '17.2', t: 'Применение насилия в отношении сотрудника', d: 'Применение насилия, не опасного для жизни или здоровья, в отношении сотрудника правоохранительного органа в связи с исполнением им обязанностей.', p: '40 месяцев лишения свободы' },
+  { n: '17.3', t: 'Публичное оскорбление представителя власти', d: 'Публичное оскорбление представителя власти при исполнении им своих обязанностей или в связи с их исполнением.', p: '30 месяцев лишения свободы или штраф $50 000' },
+  { n: '17.6', t: 'Неповиновение законному требованию', d: 'Неповиновение или ненадлежащее исполнение законного требования сотрудника правоохранительного или иного органа, уполномоченного на задержание.', p: '30 месяцев лишения свободы или штраф $30 000' },
+  { n: '17.7', t: 'Отказ от оплаты штрафа', d: 'Отказ от оплаты штрафа, выписанного правомочным лицом, а равно отказ от возмещения ущерба.', p: '30 месяцев лишения свободы' },
+  { n: '17.9', t: 'Воспрепятствование задержанию или аресту', d: 'Попытка скрыться с места задержания или ареста либо воспрепятствование задержанию, например снятием наручников.', p: '40 месяцев лишения свободы или штраф $50 000' }
+];
+let qOrder = [], qIdx = 0, qScore = 0;
+function qShuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function qStart() { qOrder = qShuffle(QA.slice()); qIdx = 0; qScore = 0; qShow(); }
+function qShow() {
+  const card = $('qCard');
+  card.textContent = '';
+  if (qIdx >= qOrder.length) {
+    const pct = Math.round(qScore / qOrder.length * 100);
+    const msg = pct === 100 ? 'Отличный результат! Кодекс вы знаете отлично.' : pct >= 70 ? 'Хороший результат, почти всё верно.' : pct >= 40 ? 'Неплохо, но стоит перечитать статьи.' : 'Советуем перечитать Уголовный кодекс и попробовать снова.';
+    card.innerHTML = `<div class="qlab">Результат</div><div style="font-size:3rem;font-weight:800;margin:8px 0">${qScore} / ${qOrder.length}</div><p class="qtext">${esc(msg)}</p>`;
+    const b = document.createElement('button');
+    b.className = 'qbtn'; b.type = 'button'; b.textContent = 'Пройти заново';
+    b.addEventListener('click', qStart);
+    card.appendChild(b);
+    return;
+  }
+  const c = qOrder[qIdx];
+  const opts = qShuffle([c, ...qShuffle(QA.filter(a => a.n !== c.n)).slice(0, 3)]);
+  card.innerHTML = `<div class="qlab">Вопрос ${qIdx + 1} из ${qOrder.length} · Правильно: ${qScore}</div><p class="qtext">${esc(c.d)}</p><div class="qlab" style="margin-top:8px">Укажите номер статьи:</div><div id="qOpts"></div><div id="qFb" class="qfb"></div>`;
+  const box = $('qOpts');
+  let answered = false;
+  const next = document.createElement('button');
+  next.className = 'qbtn'; next.type = 'button'; next.style.display = 'none';
+  next.textContent = qIdx === qOrder.length - 1 ? 'Показать результат' : 'Следующий вопрос';
+  next.addEventListener('click', () => { qIdx++; qShow(); });
+  opts.forEach(o => {
+    const b = document.createElement('button');
+    b.className = 'qopt'; b.type = 'button';
+    b.textContent = o.n;
+    b.addEventListener('click', () => {
+      if (answered) return;
+      answered = true;
+      const ok = o.n === c.n;
+      if (ok) qScore++;
+      box.querySelectorAll('.qopt').forEach(x => { x.disabled = true; if (x.textContent === c.n) x.classList.add('ok'); });
+      b.classList.add(ok ? 'ok' : 'bad');
+      $('qFb').innerHTML = `<b>${ok ? 'Верно!' : 'Неверно.'}</b> Статья ${esc(c.n)} — ${esc(c.t)}. Наказание: ${esc(c.p)}.`;
+      next.style.display = 'inline-block';
+    });
+    box.appendChild(b);
+  });
+  card.appendChild(next);
+}
+function setMode(quiz) {
+  document.querySelector('.toolbar').hidden = quiz;
+  $('list').hidden = quiz;
+  $('meta').hidden = quiz;
+  $('quizBox').hidden = !quiz;
+  $('modeLaw').setAttribute('aria-pressed', String(!quiz));
+  $('modeQuiz').setAttribute('aria-pressed', String(quiz));
+  if (quiz) qStart();
+}
+$('modeLaw').addEventListener('click', () => setMode(false));
+$('modeQuiz').addEventListener('click', () => setMode(true));
+setMode(false);
+render();
+</script>
+
+<div class="bg"><i></i><i></i><i></i></div><div class="glow"></div><div class="grain"></div><div class="prog"></div><div class="dot"></div><div class="ring"></div>
+<script>
+(function(){
+var $=function(s){return document.querySelector(s)},RM=matchMedia('(prefers-reduced-motion:reduce)').matches,B=document.body,fine=matchMedia('(hover:hover) and (pointer:fine)').matches;
+/* статистика и бегущая строка из реальных данных */
+try{var arts=0;DOCS.forEach(function(d){arts+=d.items.length});
+ 
+ $('#marq').innerHTML=DOCS.map(function(d){return '<span>'+d.name+'</span><u>⚖</u>'}).join('').repeat(4)}catch(e){}
+function count(el){var n=+el.dataset.n,t0=performance.now();(function f(now){var p=Math.min((now-t0)/1700,1);el.textContent=Math.round(n*(1-Math.pow(1-p,4)));if(p<1)requestAnimationFrame(f)})(t0)}
+/* интро-занавес */
+var pct=$('#pct'),bar=$('.in-bar i'),T0=performance.now();B.classList.add('lock');
+(function go(now){var p=RM?1:Math.min(Math.max((now-T0)/1600,0),1),e=1-Math.pow(1-p,3);pct.textContent=Math.round(e*100);bar.style.transform='scaleX('+e+')';
+ if(p<1)return requestAnimationFrame(go);
+ $('#intro').classList.add('done');B.classList.remove('lock');setTimeout(function(){B.classList.add('ready');document.querySelectorAll('[data-n]').forEach(count)},350);setTimeout(function(){var i=$('#intro');i&&i.remove()},1400)})(T0);
+/* глобус из точек с летящими дугами */
+var cv=$('#globe'),g=cv.getContext('2d'),W,H,R,dpr=Math.min(devicePixelRatio||1,2),N=RM?600:1200,P=[],A=[],mx=0,my=0,sx=0,sy=0,vis=true,rot=0,i;
+for(i=0;i<N;i++){var y=1-2*(i+.5)/N,r=Math.sqrt(1-y*y),a=i*2.399963;P.push([Math.cos(a)*r,y,Math.sin(a)*r])}
+function rnd(){var u=Math.random()*2-1,a=Math.random()*6.283,r=Math.sqrt(1-u*u);return[Math.cos(a)*r,u,Math.sin(a)*r]}
+function arc(){var a=rnd(),b=rnd(),d=a[0]*b[0]+a[1]*b[1]+a[2]*b[2];if(d>.55||d<-.3)return arc();return{a:a,b:b,o:Math.acos(d),t:Math.random()*-.5,s:.004+Math.random()*.003}}
+for(i=0;i<7;i++)A.push(arc());
+function rs(){var b=cv.getBoundingClientRect();W=b.width;H=b.height;cv.width=W*dpr;cv.height=H*dpr;g.setTransform(dpr,0,0,dpr,0,0);R=Math.min(W*.46,H*.4)}
+function pj(p,ry,rx,k){var x=p[0]*Math.cos(ry)+p[2]*Math.sin(ry),z=-p[0]*Math.sin(ry)+p[2]*Math.cos(ry),y=p[1]*Math.cos(rx)-z*Math.sin(rx);z=p[1]*Math.sin(rx)+z*Math.cos(rx);return[W/2+x*R*k,H*.5+y*R*k,z]}
+function sl(c,t){var s=Math.sin(c.o),u=Math.sin((1-t)*c.o)/s,v=Math.sin(t*c.o)/s;return[c.a[0]*u+c.b[0]*v,c.a[1]*u+c.b[1]*v,c.a[2]*u+c.b[2]*v]}
+function fr(){if(!RM)requestAnimationFrame(fr);if(!vis||document.hidden)return;
+ sx+=(mx-sx)*.05;sy+=(my-sy)*.05;rot+=.0024;var ry=rot+sx*.7,rx=.4+sy*.35,q,k;
+ g.clearRect(0,0,W,H);
+ var gr=g.createRadialGradient(W/2,H*.5,R*.15,W/2,H*.5,R*1.3);gr.addColorStop(0,'rgba(37,99,235,.3)');gr.addColorStop(.65,'rgba(37,99,235,.07)');gr.addColorStop(1,'rgba(37,99,235,0)');g.fillStyle=gr;g.fillRect(0,0,W,H);
+ for(i=0;i<N;i++){q=pj(P[i],ry,rx,1);k=(q[2]+1)/2;g.fillStyle='rgba(147,197,253,'+(.07+k*.75)+')';g.fillRect(q[0],q[1],1+k*1.4,1+k*1.4)}
+ var cx=W/2,cy=H*.5,ph=-.32,ra=R*1.28,rb=R*.36;
+ g.strokeStyle='rgba(96,165,250,.28)';g.lineWidth=1;g.beginPath();g.ellipse(cx,cy,ra,rb,ph,0,6.283);g.stroke();
+ var ob=rot*4;g.shadowColor='#60a5fa';g.shadowBlur=16;g.fillStyle='#a5f3fc';g.beginPath();g.arc(cx+ra*Math.cos(ob)*Math.cos(ph)-rb*Math.sin(ob)*Math.sin(ph),cy+ra*Math.cos(ob)*Math.sin(ph)+rb*Math.sin(ob)*Math.cos(ph),3.2,0,6.283);g.fill();
+ A.forEach(function(c,n){c.t+=c.s;if(c.t>1.3){A[n]=arc();return}
+  var h=Math.min(c.t,1),t0=Math.max(0,c.t-.3),st=22,pv=null;
+  for(var j=0;j<=st;j++){var u=t0+(h-t0)*j/st;if(h<=t0)break;var p=sl(c,u),l=1+.2*Math.sin(Math.PI*u),o=pj(p,ry,rx,l);
+   if(pv&&o[2]>-.1){g.strokeStyle='rgba(165,243,252,'+(j/st)*.9+')';g.lineWidth=1.6;g.beginPath();g.moveTo(pv[0],pv[1]);g.lineTo(o[0],o[1]);g.stroke()}pv=o}
+  if(pv&&c.t<1&&pv[2]>-.1){g.fillStyle='#fff';g.beginPath();g.arc(pv[0],pv[1],2.6,0,6.283);g.fill()}});
+ g.shadowBlur=0}
+rs();addEventListener('resize',rs);fr();
+new IntersectionObserver(function(e){vis=e[0].isIntersecting}).observe($('#hero'));
+/* курсор, подсветка, магнитные кнопки */
+var root=document.documentElement,dot=$('.dot'),ring=$('.ring'),last=null;
+if(fine){var tx=innerWidth/2,ty=innerHeight/2,dx=tx,dy=ty,rx2=tx,ry2=ty,hov=false,dn=false,st=false;
+ addEventListener('mousedown',function(){dn=true});addEventListener('mouseup',function(){dn=false});
+ (function lp(){dx+=(tx-dx)*.4;dy+=(ty-dy)*.4;rx2+=(tx-rx2)*.15;ry2+=(ty-ry2)*.15;
+  dot.style.transform='translate3d('+dx+'px,'+dy+'px,0) scale('+(hov?.5:1)+')';ring.style.transform='translate3d('+rx2+'px,'+ry2+'px,0) scale('+(dn?.8:hov?1.7:1)+')';requestAnimationFrame(lp)})();
+ addEventListener('mousemove',function(e){tx=e.clientX;ty=e.clientY;if(!st){st=true;dx=rx2=tx;dy=ry2=ty;dot.style.opacity=ring.style.opacity=1}
+  var t=e.target;hov=!!(t.closest&&t.closest('a,button,summary,input,.art'));ring.classList.toggle('on',hov)},{passive:true});
+ document.addEventListener('mouseleave',function(){dot.style.opacity=ring.style.opacity=0})}
+addEventListener('mousemove',function(e){mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5;root.style.setProperty('--mx',e.clientX+'px');root.style.setProperty('--my',e.clientY+'px');
+ var t=e.target;if(!t.closest)return;var a=t.closest('.art');
+ if(a){var r=a.getBoundingClientRect();a.style.setProperty('--px',e.clientX-r.left+'px');a.style.setProperty('--py',e.clientY-r.top+'px')}
+ var m=t.closest('.btn,.tab,.ask button,.qbtn');if(last&&last!==m){last.style.removeProperty('--tx');last.style.removeProperty('--ty')}
+ if(m){var q=m.getBoundingClientRect();m.style.setProperty('--tx',(e.clientX-q.left-q.width/2)*.22+'px');m.style.setProperty('--ty',(e.clientY-q.top-q.height/2)*.3+'px')}last=m},{passive:true});
+/* скролл: прогресс, параллакс героя, ускорение строки */
+var pr=$('.prog'),hi=$('.hero-in'),mq=$('#marq'),ly=scrollY,rate=1;
+function onS(){var m=root.scrollHeight-innerHeight,y=scrollY;pr.style.transform='scaleX('+(m>0?y/m:0)+')';
+ if(y<innerHeight*1.2){hi.style.transform='translateY('+y*.3+'px)';hi.style.opacity=Math.max(0,1-y/(innerHeight*.75));cv.style.transform='translateY('+y*.14+'px) scale('+(1+y/2200)+')'}}
+addEventListener('scroll',onS,{passive:true});onS();
+if(!RM)(function mqf(){var d=Math.abs(scrollY-ly);ly=scrollY;rate+=(1+Math.min(d*.6,9)-rate)*.08;var an=mq&&mq.getAnimations&&mq.getAnimations()[0];if(an)an.playbackRate=rate;requestAnimationFrame(mqf)})();
+/* появление карточек при скролле */
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.05,rootMargin:'0px 0px -30px 0px'});
+function scan(){var n=0;document.querySelectorAll('.art:not([data-rv]),.agent:not([data-rv]),footer:not([data-rv]),.qcard:not([data-rv]),.meta:not([data-rv])').forEach(function(el){el.dataset.rv=1;el.classList.add('rv');el.style.setProperty('--d',(n++%6)*.07+'s');io.observe(el)})}
+new MutationObserver(scan).observe($('main'),{childList:true,subtree:true});scan();
+})();
+</script>
+<script>
+(function(){
+var g=function(i){return document.getElementById(i)},RM=matchMedia('(prefers-reduced-motion:reduce)').matches,i;
+/* порталы-разделы вместо цифр */
+var IC={criminal:'<path d="M24 5l15 6v11c0 10-6.500 17-15 21C15.500 39 9 32 9 22V11z"/><path d="M17 23l5 5 9-10"/>',procedure:'<path d="M10 8h22a4 4 0 0 1 4 4v28H14a4 4 0 0 1-4-4z"/><path d="M16 16h14M16 23h14M16 30h8"/>',lspd:'<path d="M24 4l5.500 11 12 1.800-8.700 8.400 2 12L24 31.500 13.200 37.200l2-12L6.500 16.800l12-1.800z"/>'};
+var DS={criminal:'Составы преступлений, сроки и штрафы',procedure:'Порядок задержания, допроса и суда',lspd:'Правила службы сотрудников департамента'};
+g('portals').innerHTML=DOCS.map(function(d){return '<button class="pt" type="button" data-d="'+d.id+'"><svg viewBox="0 0 48 48">'+(IC[d.id]||IC.procedure)+'</svg><b>'+d.name+'</b><span>'+(DS[d.id]||'')+'</span><em>Открыть</em></button>'}).join('');
+g('portals').addEventListener('click',function(e){var b=e.target.closest('.pt');if(!b)return;setMode(false);state.doc=b.dataset.d;state.code='ALL';state.q='';g('search').value='';render();document.querySelector('.toolbar').scrollIntoView({behavior:'smooth',block:'start'})});
+g('portals').addEventListener('mousemove',function(e){var b=e.target.closest('.pt');if(!b)return;var r=b.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;b.style.setProperty('--ry',(x-.5)*14+'deg');b.style.setProperty('--rx',(.5-y)*14+'deg');b.style.setProperty('--gx',x*100+'%');b.style.setProperty('--gy',y*100+'%')});
+g('portals').addEventListener('mouseout',function(e){var b=e.target.closest('.pt');if(b){b.style.setProperty('--rx','0deg');b.style.setProperty('--ry','0deg')}});
+/* пыль с глубиной */
+if(!RM){var c=document.createElement('canvas');c.id='dust';document.body.appendChild(c);var x=c.getContext('2d'),W,H,D=[],mx=0,my=0,dp=Math.min(devicePixelRatio||1,2);
+ function rs(){W=innerWidth;H=innerHeight;c.width=W*dp;c.height=H*dp;x.setTransform(dp,0,0,dp,0,0);D=[];for(i=0;i<Math.min(90,W*H/16000);i++)D.push({x:Math.random()*W,y:Math.random()*H,z:Math.random()*.9+.1,v:Math.random()*.25+.05})}
+ rs();addEventListener('resize',rs);addEventListener('mousemove',function(e){mx=e.clientX/W-.5;my=e.clientY/H-.5},{passive:true});
+ (function f(){requestAnimationFrame(f);if(document.hidden)return;x.clearRect(0,0,W,H);D.forEach(function(p){p.y-=p.v*p.z;if(p.y<-5){p.y=H+5;p.x=Math.random()*W}var px=p.x+mx*60*p.z,py=p.y+my*40*p.z;x.fillStyle='rgba(165,215,255,'+(.15+p.z*.5)+')';x.beginPath();x.arc(px,py,p.z*1.8,0,6.283);x.fill()})})()}
+/* огромная надпись в подвале заполняется при прокрутке */
+var mg=g('mega');function mp(){var r=mg.getBoundingClientRect(),p=(innerHeight-r.top)/(innerHeight*.75);mg.style.setProperty('--fp',Math.max(0,Math.min(1,p))*100+'%')}
+addEventListener('scroll',mp,{passive:true});mp();
+/* помощник: поиск по Уголовному, Процессуальному кодексам и Уставу */
+var IDX=null,DN={criminal:'УК',procedure:'ПК',lspd:'Устав LSPD'},SW={что:1,как:1,если:1,или:1,при:1,для:1,его:1,она:1,они:1,это:1,был:1,быть:1,мне:1,можно:1,нужно:1,кто:1,где:1,когда:1,ли:1,там:1,так:1,без:1,про:1,чем:1,себя:1,если:1,который:1,какой:1,какие:1,будет:1,если:1};
+var HINT=[['lspd',/устав|lspd|патрул|форм[аыу]|звани|отстран|рапорт|субординац|дежурн|должностн|сотрудник департамент/],['procedure',/процесс|суд|прокурор|адвокат|допрос|обыск|задержан|протокол|доказательств|ордер|заседан|права/],['criminal',/преступ|наказан|срок|штраф|статья ук|месяц|уголовн|ук /]];
+function nr(s){return String(s).toLowerCase().replace(/ё/g,'е')}
+function fl(p){return(p||[]).map(function(a){return typeof a==='string'?a:(a.h||'')+(a.items&&a.items.length?': '+a.items.join('; '):'')}).join(' ')}
+function build(){IDX=[];DOCS.forEach(function(d){d.items.forEach(function(it){var b=(fl(it.parts)+' '+(it.p?'Наказание: '+it.p:'')).trim();IDX.push({d:d.id,it:it,t:nr(it.t),b:nr(it.n+' '+it.t+' '+b),body:b})})})}
+function search(q){if(!IDX)build();var t=nr(q),out=[],nums=t.match(/\d+(?:\.\d+)?/g)||[];
+ nums.forEach(function(n){IDX.forEach(function(x){if(nr(x.it.n).replace(/^ст\.\s*/,'')===n)out.push({x:x,s:100})})});
+ var st=t.split(/[^a-zа-я0-9]+/).filter(function(w){return w.length>2&&!SW[w]&&!/^\d+$/.test(w)}).map(function(w){return w.length>7?w.slice(0,-3):w.length>5?w.slice(0,-2):w.length>4?w.slice(0,-1):w});
+ st=st.filter(function(w,k){return st.indexOf(w)===k});
+ if(st.length){var need=Math.max(1,Math.ceil(st.length/2)),hs=HINT.filter(function(h){return h[1].test(t)}).map(function(h){return h[0]});
+  IDX.forEach(function(x){var m=0,s=0;st.forEach(function(w){if(x.t.indexOf(w)>-1){m++;s+=4}else if(x.b.indexOf(w)>-1){m++;s+=1}});if(m<need)return;if(hs.indexOf(x.d)>-1)s*=1.5;out.push({x:x,s:s})})}
+ return out.sort(function(a,b){return b.s-a.s})}
+function blk(r){var x=r.x,it=x.it,n=/^\d/.test(it.n)?'ст. '+it.n:it.n,tx=x.body;if(tx.length>360)tx=tx.slice(0,tx.lastIndexOf(' ',360))+'…';return{title:DN[x.d]+' · '+n+' — '+it.t,text:tx||'Откройте статью, чтобы прочитать текст.',open:{d:x.d,n:it.n}}}
+window.answer=function(q){var t=nr(q),skip={},cur=RULES.filter(function(r){return r.when(t)}).slice(0,2);
+ var out=cur.map(function(r){var m=r.text.match(/\d+\.\d+/g)||[];m.forEach(function(n){skip[n]=1});return{title:'УК · '+r.title,text:r.text,open:m[0]?{d:'criminal',n:m[0]}:null}});
+ var seen={};search(q).filter(function(r){var k=r.x.d+r.x.it.n;if(seen[k]||(r.x.d==='criminal'&&skip[r.x.it.n]))return false;return seen[k]=1}).slice(0,Math.max(1,4-out.length)).forEach(function(r){out.push(blk(r))});
+ return out.length?out:[{text:'Не нашёл подходящих статей. Опишите действие своими словами или назовите номер статьи, например: «задержание», «обыск», «угон машины», «ст. 17.2».'}]};
+window.openArt=function(did,n){setMode(false);state.doc=did;state.code='ALL';state.q=n.toLowerCase();g('search').value=n;render();
+ setTimeout(function(){var l=[].slice.call(document.querySelectorAll('#list .art')),el=l.filter(function(a){var u=a.querySelector('.num');return u&&u.textContent.trim().replace(/^Статья\s*/,'')===n})[0]||l[0];if(el){el.open=true;el.scrollIntoView({behavior:'smooth',block:'center'})}},150)};
+window.addMsg=function(role,blocks){var c=g('chat'),d=document.createElement('div');d.className='msg '+role;
+ if(role==='user')d.textContent=blocks;else blocks.forEach(function(b){var w=document.createElement('div');w.className='blk';
+  if(b.title){var s=document.createElement('span');s.className='t';s.textContent=b.title;w.appendChild(s)}
+  var p=document.createElement('span');p.textContent=b.text;w.appendChild(p);
+  if(b.open){var o=document.createElement('button');o.type='button';o.className='go';o.textContent='Открыть статью';o.onclick=function(){openArt(b.open.d,b.open.n)};w.appendChild(o)}
+  d.appendChild(w)});
+ c.appendChild(d);c.scrollTop=c.scrollHeight;return d};
+window.ask=function(raw){var q=raw.trim();if(!q)return;addMsg('user',q);var ty=document.createElement('div');ty.className='msg bot typing';ty.innerHTML='<i></i><i></i><i></i>';g('chat').appendChild(ty);g('chat').scrollTop=1e9;g('q').value='';
+ setTimeout(function(){ty.remove();addMsg('bot',answer(q))},RM?0:600+Math.random()*400)};
+g('chat').textContent='';addMsg('bot',[{text:'Здравствуйте! Опишите ситуацию или назовите тему, и я найду статьи в Уголовном и Процессуальном кодексах и в Уставе LSPD.'}]);
+g('chips').innerHTML=['ударил сотрудника','задержание','обыск','права задержанного','угон машины','устав патрулирование'].map(function(s){return '<button class="chip" type="button">'+s+'</button>'}).join('');
+g('chips').addEventListener('click',function(e){var b=e.target.closest('.chip');if(b)ask(b.textContent)});
+})();
+</script>
+</body>
+</html>
